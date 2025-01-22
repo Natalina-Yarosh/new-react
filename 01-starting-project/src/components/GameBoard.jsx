@@ -11,13 +11,13 @@ export default function GameBoard() {
     function handleSelectSquare(rowIndex,colIndex ) {
         setGameBoard((prevGameBoard ) => {
             const updatedGameBoard = [...prevGameBoard.map(innerArray => [...innerArray])];
-            prevGameBoard[rowIndex][colIndex] = 'X';
+            updatedGameBoard[rowIndex][colIndex] = 'X';
             return updatedGameBoard
         })
     }
 
     return <ol id='game-board'>
-        {initialGameBoard.map((row, rowIndex) => <li key={rowIndex}>
+        {gameBoard.map((row, rowIndex) => <li key={rowIndex}>
             <ol>
                 {row.map((playerSymbol, colIndex) => <li key={colIndex}>
                         <button onClick={() => handleSelectSquare(rowIndex, colIndex ) }>{playerSymbol}</button>
