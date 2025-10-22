@@ -1,15 +1,16 @@
-import { useRef, useState } from "react";
+import { useImperativeHandle, useRef } from "react";
 
-export default function ResultModal({result, targetTime}) {
-
-  const playerName = useRef();
-  const [enteredPlayerName, setEnteredPlayerName] = useState('')
-  function handleClick(){
-    setEnteredPlayerName( playerName.current.value)
-    playerName.current.value  = ''
-  }
+export default function ResultModal({ref, result, targetTime}) {
+  const dialog = useRef()
+  useImperativeHandle(ref, () => {
+    return{
+      open(){
+        dialog.current.showModal()
+      }
+    }
+  })
   return (
-    <dialog className="result-modal" >
+    <dialog ref={dialog} className="result-modal" >
       <h2>You {result}  </h2>
       <p>
        The target time was <strong>{targetTime}</strong> seconds.
